@@ -506,9 +506,7 @@ def get_pool_core(world: World) -> tuple[list[str], dict[str, Item]]:
                 if puzzle in world.settings.silver_rupee_pouches:
                     pending_junk_pool.append(f"Silver Rupee Pouch ({puzzle})")
                 else:
-                    # Customized: if any pouch settings are enabled, non-pouch silver rupees are vanilla
-                    if world.settings.silver_rupee_pouches_choice == 'off':
-                        pending_junk_pool.append(f"Silver Rupee ({puzzle})")
+                    pending_junk_pool.append(f"Silver Rupee ({puzzle})")
         if world.settings.shuffle_song_items == 'any':
             pending_junk_pool.extend(song_list)
         if world.settings.shuffle_individual_ocarina_notes:
@@ -796,16 +794,11 @@ def get_pool_core(world: World) -> tuple[list[str], dict[str, Item]]:
                 puzzle = location.vanilla_item[:-1].split('(')[1]
                 if shuffle_setting == 'vanilla':
                     shuffle_item = False
-                elif world.settings.silver_rupee_pouches_choice != 'off':
-                    if puzzle in world.settings.silver_rupee_pouches:
-                        item = f'Silver Rupee Pouch ({puzzle})'
-                        if vanilla_items_processed[location.vanilla_item]:
-                            item = get_junk_item()[0]
-                            shuffle_item = True
-                    else:
-                        # Customized: if any pouch settings are enabled, non-pouch silver rupees are vanilla
-                        shuffle_setting = 'vanilla'
-                        shuffle_item = False
+                elif puzzle in world.settings.silver_rupee_pouches:
+                    item = f'Silver Rupee Pouch ({puzzle})'
+                    if vanilla_items_processed[location.vanilla_item]:
+                        item = get_junk_item()[0]
+                        shuffle_item = True
             # Any other item in a dungeon.
             elif location.type in ["Chest", "NPC", "Song", "Collectable", "Cutscene", "BossHeart"]:
                 shuffle_item = True
