@@ -120,9 +120,7 @@
             "Shadow Temple Wind Hint Chest": "True"
         },
         "exits": {
-            "Shadow Temple After Wind": "True",
-            # Reverse Shadow assumes 4 keys at both ends, so no need to check keys here
-            "Shadow Temple Invisible Spikes": "Hookshot"
+            "Shadow Temple After Wind": "True"
         }
     },
     {
