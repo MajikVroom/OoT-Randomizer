@@ -1,7 +1,7 @@
 from __future__ import annotations
 import sys
 from collections import OrderedDict
-from typing import Optional
+from typing import Optional, TYPE_CHECKING
 
 if sys.version_info >= (3, 10):
     from typing import TypeAlias
@@ -12,6 +12,9 @@ LocationDefault: TypeAlias = "Optional[int | tuple[int, ...] | list[tuple[int, .
 LocationAddress: TypeAlias = "Optional[int | list[int]]"
 LocationAddresses: TypeAlias = "Optional[tuple[LocationAddress, LocationAddress]]"
 LocationFilterTags: TypeAlias = "Optional[tuple[str, ...] | str]"
+
+if TYPE_CHECKING:
+    from World import World
 
 
 def shop_address(shop_id: int, shelf_id: int) -> int:
@@ -59,15 +62,15 @@ def shop_address(shop_id: int, shelf_id: int) -> int:
 #   Location:                                                        Type             Scene  Default Addresses                      Vanilla Item                             Categories
 location_table: dict[str, tuple[str, Optional[int], LocationDefault, LocationAddresses, Optional[str], LocationFilterTags]] = OrderedDict([
     ## Dungeon Rewards
-    ("Links Pocket",                                                 ("Boss",         None,  None, None,                            'Light Medallion',                       None)),
-    ("Queen Gohma",                                                  ("Boss",         None,  0x6C, (0x0CA315F, 0x2079571),          'Kokiri Emerald',                        None)),
-    ("King Dodongo",                                                 ("Boss",         None,  0x6D, (0x0CA30DF, 0x2223309),          'Goron Ruby',                            None)),
-    ("Barinade",                                                     ("Boss",         None,  0x6E, (0x0CA36EB, 0x2113C19),          'Zora Sapphire',                         None)),
-    ("Phantom Ganon",                                                ("Boss",         None,  0x66, (0x0CA3D07, 0x0D4ED79),          'Forest Medallion',                      None)),
-    ("Volvagia",                                                     ("Boss",         None,  0x67, (0x0CA3D93, 0x0D10135),          'Fire Medallion',                        None)),
-    ("Morpha",                                                       ("Boss",         None,  0x68, (0x0CA3E1F, 0x0D5A3A9),          'Water Medallion',                       None)),
-    ("Bongo Bongo",                                                  ("Boss",         None,  0x6A, (0x0CA3F43, 0x0D13E19),          'Shadow Medallion',                      None)),
-    ("Twinrova",                                                     ("Boss",         None,  0x69, (0x0CA3EB3, 0x0D39FF1),          'Spirit Medallion',                      None)),
+    ("ToT Reward from Rauru",                                        ("Cutscene",     0xFF,  0x04, None,                            'Light Medallion',                       ("Temple of Time", "NPCs", "Dungeon Rewards",))),
+    ("Queen Gohma",                                                  ("Boss",         0x11,  0x65, None,                            'Kokiri Emerald',                        ("Deku Tree", "Deku Tree MQ", "Vanilla Dungeons", "Master Quest", "Dungeon Rewards",))),
+    ("King Dodongo",                                                 ("Boss",         0x12,  0x65, None,                            'Goron Ruby',                            ("Dodongo's Cavern", "Dodongo's Cavern MQ", "Vanilla Dungeons", "Master Quest", "Dungeon Rewards",))),
+    ("Barinade",                                                     ("Boss",         0x13,  0x65, None,                            'Zora Sapphire',                         ("Jabu Jabu's Belly", "Jabu Jabu's Belly MQ", "Vanilla Dungeons", "Master Quest", "Dungeon Rewards",))),
+    ("Phantom Ganon",                                                ("Boss",         0x14,  0x65, None,                            'Forest Medallion',                      ("Forest Temple", "Forest Temple MQ", "Vanilla Dungeons", "Master Quest", "Dungeon Rewards",))),
+    ("Volvagia",                                                     ("Boss",         0x15,  0x65, None,                            'Fire Medallion',                        ("Fire Temple", "Fire Temple MQ", "Vanilla Dungeons", "Master Quest", "Dungeon Rewards",))),
+    ("Morpha",                                                       ("Boss",         0x16,  0x65, None,                            'Water Medallion',                       ("Water Temple", "Water Temple MQ", "Vanilla Dungeons", "Master Quest", "Dungeon Rewards",))),
+    ("Bongo Bongo",                                                  ("Boss",         0x18,  0x65, None,                            'Shadow Medallion',                      ("Shadow Temple", "Shadow Temple MQ", "Vanilla Dungeons", "Master Quest", "Dungeon Rewards",))),
+    ("Twinrova",                                                     ("Boss",         0x17,  0x65, None,                            'Spirit Medallion',                      ("Spirit Temple", "Spirit Temple MQ", "Vanilla Dungeons", "Master Quest", "Dungeon Rewards",))),
     ("Ganon",                                                        ("Event",        None,  None, None,                            'Triforce',                              None)),
     ("Gift from Sages",                                              ("Cutscene",     0xFF,  0x03, None,                             None,                                   None)),
 
@@ -161,8 +164,8 @@ location_table: dict[str, tuple[str, Optional[int], LocationDefault, LocationAdd
     ("LW Ocarina Memory Game",                                       ("NPC",          0x5B,  0x76, None,                            'Piece of Heart',                        ("Lost Woods", "Forest Area", "Minigames",))),
     ("LW Target in Woods",                                           ("NPC",          0x5B,  0x60, None,                            'Slingshot',                             ("Lost Woods", "Forest Area", "NPCs",))),
     ("LW Near Shortcuts Grotto Chest",                               ("Chest",        0x3E,  0x14, None,                            'Rupees (5)',                            ("Lost Woods", "Forest Area", "Grottos", "Chests",))),
-    ("LW Trade Cojiro",                                              ("NPC",          0x5B,  0x1F, None,                            'Odd Mushroom',                          ("the Lost Woods", "Forest",))),
-    ("LW Trade Odd Potion",                                          ("NPC",          0x5B,  0x21, None,                            'Poachers Saw',                          ("the Lost Woods", "Forest",))),
+    ("LW Trade Cojiro",                                              ("NPC",          0x5B,  0x1F, None,                            'Odd Mushroom',                          ("Lost Woods", "Forest",))),
+    ("LW Trade Odd Potion",                                          ("NPC",          0x5B,  0x21, None,                            'Poachers Saw',                          ("Lost Woods", "Forest",))),
     ("Deku Theater Skull Mask",                                      ("NPC",          0x3E,  0x77, None,                            'Deku Stick Capacity',                   ("Lost Woods", "Forest Area", "Grottos",))),
     ("Deku Theater Mask of Truth",                                   ("NPC",          0x3E,  0x7A, None,                            'Deku Nut Capacity',                     ("Lost Woods", "Forest Area", "Need Spiritual Stones", "Grottos",))),
     ("LW Skull Kid",                                                 ("NPC",          0x5B,  0x3E, None,                            'Piece of Heart',                        ("Lost Woods", "Forest Area", "NPCs",))),
@@ -263,14 +266,14 @@ location_table: dict[str, tuple[str, Optional[int], LocationDefault, LocationAdd
     ("Market Treasure Chest Game Reward",                            ("Chest",        0x10,  0x0A, None,                            'Piece of Heart (Treasure Chest Game)',  ("Market", "Minigames", "Chests",))),
     ("Market 10 Big Poes",                                           ("NPC",          0x4D,  0x0F, None,                            'Bottle',                                ("Market", "NPCs",))),
     ("Market GS Guard House",                                        ("GS Token",     0x0E,  0x08, None,                            'Gold Skulltula Token',                  ("Market", "Gold Skulltulas",))),
-    ("Market Mask Shop Item 1",                                      ("MaskShop",     0x33,  0x53, (shop_address(10, 0), None),     'Gerudo Mask',                           ("the Market", "Market", "Shops"))),
-    ("Market Mask Shop Item 2",                                      ("MaskShop",     0x33,  0x52, (shop_address(10, 1), None),     'Zora Mask',                             ("the Market", "Market", "Shops"))),
-    ("Market Mask Shop Item 3",                                      ("MaskShop",     0x33,  0x1C, (shop_address(10, 2), None),     'Mask of Truth',                         ("the Market", "Market", "Shops"))),
-    ("Market Mask Shop Item 4",                                      ("MaskShop",     0x33,  0x51, (shop_address(10, 3), None),     'Goron Mask',                            ("the Market", "Market", "Shops"))),
-    ("Market Mask Shop Item 5",                                      ("MaskShop",     0x33,  0x17, (shop_address(10, 4), None),     'Skull Mask',                            ("the Market", "Market", "Shops"))),
-    ("Market Mask Shop Item 6",                                      ("MaskShop",     0x33,  0x1A, (shop_address(10, 5), None),     'Keaton Mask',                           ("the Market", "Market", "Shops"))),
-    ("Market Mask Shop Item 7",                                      ("MaskShop",     0x33,  0x1B, (shop_address(10, 6), None),     'Bunny Hood',                            ("the Market", "Market", "Shops"))),
-    ("Market Mask Shop Item 8",                                      ("MaskShop",     0x33,  0x18, (shop_address(10, 7), None),     'Spooky Mask',                           ("the Market", "Market", "Shops"))),
+    ("Market Mask Shop Item 1",                                      ("MaskShop",     0x33,  0x53, (shop_address(10, 0), None),     'Gerudo Mask',                           ("Market", "Shops"))),
+    ("Market Mask Shop Item 2",                                      ("MaskShop",     0x33,  0x52, (shop_address(10, 1), None),     'Zora Mask',                             ("Market", "Shops"))),
+    ("Market Mask Shop Item 3",                                      ("MaskShop",     0x33,  0x1C, (shop_address(10, 2), None),     'Mask of Truth',                         ("Market", "Shops"))),
+    ("Market Mask Shop Item 4",                                      ("MaskShop",     0x33,  0x51, (shop_address(10, 3), None),     'Goron Mask',                            ("Market", "Shops"))),
+    ("Market Mask Shop Item 5",                                      ("MaskShop",     0x33,  0x17, (shop_address(10, 4), None),     'Skull Mask',                            ("Market", "Shops"))),
+    ("Market Mask Shop Item 6",                                      ("MaskShop",     0x33,  0x1A, (shop_address(10, 5), None),     'Keaton Mask',                           ("Market", "Shops"))),
+    ("Market Mask Shop Item 7",                                      ("MaskShop",     0x33,  0x1B, (shop_address(10, 6), None),     'Bunny Hood',                            ("Market", "Shops"))),
+    ("Market Mask Shop Item 8",                                      ("MaskShop",     0x33,  0x18, (shop_address(10, 7), None),     'Spooky Mask',                           ("Market", "Shops"))),
     ("Market Bazaar Item 1",                                         ("Shop",         0x2C,  0x30, (shop_address(4, 0), None),      'Buy Hylian Shield',                     ("Market", "Shops",))),
     ("Market Bazaar Item 2",                                         ("Shop",         0x2C,  0x31, (shop_address(4, 1), None),      'Buy Bombs (5) for 35 Rupees',           ("Market", "Shops",))),
     ("Market Bazaar Item 3",                                         ("Shop",         0x2C,  0x32, (shop_address(4, 2), None),      'Buy Deku Nut (5)',                      ("Market", "Shops",))),
@@ -1726,28 +1729,28 @@ location_table: dict[str, tuple[str, Optional[int], LocationDefault, LocationAdd
     ("Water Temple MQ Lizalfos Hallway Hall Crate 3",                ("Crate",        0x05,  (20,0,14), None,                       'Rupee (1)',                             ("Water Temple MQ", "Master Quest", "Crates",))),
 
     # Water Temple MQ Wonderitems
-    ("Water Temple MQ Below Central Pillar Hookshot Wonderitem",     ("Wonderitem",   0x05,  (2,0,25), None,                        'Rupees (20)',                           ("Water Temple", "Master Quest", "Wonderitem"))),
-    ("Water Temple MQ Triple Wall Torch Hookshot/Bow Wonderitem",    ("Wonderitem",   0x05,  (3,0,4), None,                        'Rupees (20)',                           ("Water Temple", "Master Quest", "Wonderitem"))),
-    ("Water Temple MQ Hookshot Waterfall Left Hookshot Wonderitem 1",("Wonderitem",   0x05,  (5,0,10), None,                        'Rupees (20)',                           ("Water Temple", "Master Quest", "Wonderitem"))),
-    ("Water Temple MQ Hookshot Waterfall Left Hookshot Wonderitem 2",("Wonderitem",   0x05,  (5,0,11), None,                        'Rupees (20)',                           ("Water Temple", "Master Quest", "Wonderitem"))),
-    ("Water Temple MQ Hookshot Waterfall Left Hookshot Wonderitem 3",("Wonderitem",   0x05,  (5,0,12), None,                        'Rupees (20)',                           ("Water Temple", "Master Quest", "Wonderitem"))),
-    ("Water Temple MQ Hookshot Waterfall Right Hookshot Wonderitem 1",("Wonderitem",   0x05,  (5,0,3), None,                        'Rupees (20)',                           ("Water Temple", "Master Quest", "Wonderitem"))),
-    ("Water Temple MQ Hookshot Waterfall Right Hookshot Wonderitem 2",("Wonderitem",   0x05,  (5,0,4), None,                        'Rupees (20)',                           ("Water Temple", "Master Quest", "Wonderitem"))),
-    ("Water Temple MQ Hookshot Waterfall Right Hookshot Wonderitem 3",("Wonderitem",   0x05,  (5,0,5), None,                        'Rupees (20)',                           ("Water Temple", "Master Quest", "Wonderitem"))),
-    ("Water Temple MQ After Dark Link Hookshot Wonderitem",          ("Wonderitem",   0x05,  (7,0,1), None,                        'Rupees (20)',                           ("Water Temple", "Master Quest", "Wonderitem"))),
-    ("Water Temple MQ Dragon Statue Eyes Hookshot Wonderitem 1",     ("Wonderitem",   0x05,  (8,0,5), None,                        'Rupees (20)',                           ("Water Temple", "Master Quest", "Wonderitem"))),
-    ("Water Temple MQ Dragon Statue Eyes Hookshot Wonderitem 2",     ("Wonderitem",   0x05,  (8,0,7), None,                        'Rupees (20)',                           ("Water Temple", "Master Quest", "Wonderitem"))),
-    ("Water Temple MQ Dragon Statue Crates Hookshot Wonderitem",     ("Wonderitem",   0x05,  (8,0,6), None,                        'Rupees (20)',                           ("Water Temple", "Master Quest", "Wonderitem"))),
-    ("Water Temple MQ Upper Water Switch Hookshot Wonderitem",       ("Wonderitem",   0x05,  (10,0,2), None,                        'Rupees (20)',                           ("Water Temple", "Master Quest", "Wonderitem"))),
-    ("Water Temple MQ Boss Hallway Hookshot Wonderitem 1",           ("Wonderitem",   0x05,  (11,0,1), None,                        'Rupees (20)',                           ("Water Temple", "Master Quest", "Wonderitem"))),
-    ("Water Temple MQ Boss Hallway Hookshot Wonderitem 2",           ("Wonderitem",   0x05,  (11,0,2), None,                        'Rupees (20)',                           ("Water Temple", "Master Quest", "Wonderitem"))),
-    ("Water Temple MQ 3 Water Spouts Proximity Wonderitem 1",        ("Wonderitem",   0x05,  (15,0,1), None,                        'Rupees (5)',                           ("Water Temple", "Master Quest", "Wonderitem"))),
-    ("Water Temple MQ 3 Water Spouts Proximity Wonderitem 2",        ("Wonderitem",   0x05,  (15,0,2), None,                        'Arrows (10)',                           ("Water Temple", "Master Quest", "Wonderitem"))),
-    ("Water Temple MQ Freestanding Key Hookshot Wonderitem",         ("Wonderitem",   0x05,  (16,0,1), None,                        'Rupees (20)',                           ("Water Temple", "Master Quest", "Wonderitem"))),
-    ("Water Temple MQ Longshot Chest Hookshot Wonderitem",           ("Wonderitem",   0x05,  (17,0,8), None,                        'Rupees (20)',                           ("Water Temple", "Master Quest", "Wonderitem"))),
-    ("Water Temple MQ Compass Chest Hookshot Wonderitem",            ("Wonderitem",   0x05,  (18,0,4), None,                        'Rupees (20)',                           ("Water Temple", "Master Quest", "Wonderitem"))),
-    ("Water Temple MQ Map Chest Hookshot Wonderitem",                ("Wonderitem",   0x05,  (19,0,6), None,                        'Rupees (20)',                           ("Water Temple", "Master Quest", "Wonderitem"))),
-    ("Water Temple MQ Lizalfos Hallway Hookshot Wonderitem",         ("Wonderitem",   0x05,  (20,0,3), None,                        'Rupees (20)',                           ("Water Temple", "Master Quest", "Wonderitem"))),
+    ("Water Temple MQ Below Central Pillar Hookshot Wonderitem",     ("Wonderitem",   0x05,  (2,0,25), None,                        'Rupees (20)',                           ("Water Temple MQ", "Master Quest", "Wonderitem"))),
+    ("Water Temple MQ Triple Wall Torch Hookshot/Bow Wonderitem",    ("Wonderitem",   0x05,  (3,0,4), None,                         'Rupees (20)',                           ("Water Temple MQ", "Master Quest", "Wonderitem"))),
+    ("Water Temple MQ Hookshot Waterfall Left Hookshot Wonderitem 1",("Wonderitem",   0x05,  (5,0,10), None,                        'Rupees (20)',                           ("Water Temple MQ", "Master Quest", "Wonderitem"))),
+    ("Water Temple MQ Hookshot Waterfall Left Hookshot Wonderitem 2",("Wonderitem",   0x05,  (5,0,11), None,                        'Rupees (20)',                           ("Water Temple MQ", "Master Quest", "Wonderitem"))),
+    ("Water Temple MQ Hookshot Waterfall Left Hookshot Wonderitem 3",("Wonderitem",   0x05,  (5,0,12), None,                        'Rupees (20)',                           ("Water Temple MQ", "Master Quest", "Wonderitem"))),
+    ("Water Temple MQ Hookshot Waterfall Right Hookshot Wonderitem 1",("Wonderitem",  0x05,  (5,0,3), None,                         'Rupees (20)',                           ("Water Temple MQ", "Master Quest", "Wonderitem"))),
+    ("Water Temple MQ Hookshot Waterfall Right Hookshot Wonderitem 2",("Wonderitem",  0x05,  (5,0,4), None,                         'Rupees (20)',                           ("Water Temple MQ", "Master Quest", "Wonderitem"))),
+    ("Water Temple MQ Hookshot Waterfall Right Hookshot Wonderitem 3",("Wonderitem",  0x05,  (5,0,5), None,                         'Rupees (20)',                           ("Water Temple MQ", "Master Quest", "Wonderitem"))),
+    ("Water Temple MQ After Dark Link Hookshot Wonderitem",          ("Wonderitem",   0x05,  (7,0,1), None,                         'Rupees (20)',                           ("Water Temple MQ", "Master Quest", "Wonderitem"))),
+    ("Water Temple MQ Dragon Statue Eyes Hookshot Wonderitem 1",     ("Wonderitem",   0x05,  (8,0,5), None,                         'Rupees (20)',                           ("Water Temple MQ", "Master Quest", "Wonderitem"))),
+    ("Water Temple MQ Dragon Statue Eyes Hookshot Wonderitem 2",     ("Wonderitem",   0x05,  (8,0,7), None,                         'Rupees (20)',                           ("Water Temple MQ", "Master Quest", "Wonderitem"))),
+    ("Water Temple MQ Dragon Statue Crates Hookshot Wonderitem",     ("Wonderitem",   0x05,  (8,0,6), None,                         'Rupees (20)',                           ("Water Temple MQ", "Master Quest", "Wonderitem"))),
+    ("Water Temple MQ Upper Water Switch Hookshot Wonderitem",       ("Wonderitem",   0x05,  (10,0,2), None,                        'Rupees (20)',                           ("Water Temple MQ", "Master Quest", "Wonderitem"))),
+    ("Water Temple MQ Boss Hallway Hookshot Wonderitem 1",           ("Wonderitem",   0x05,  (11,0,1), None,                        'Rupees (20)',                           ("Water Temple MQ", "Master Quest", "Wonderitem"))),
+    ("Water Temple MQ Boss Hallway Hookshot Wonderitem 2",           ("Wonderitem",   0x05,  (11,0,2), None,                        'Rupees (20)',                           ("Water Temple MQ", "Master Quest", "Wonderitem"))),
+    ("Water Temple MQ 3 Water Spouts Proximity Wonderitem 1",        ("Wonderitem",   0x05,  (15,0,1), None,                        'Rupees (5)',                            ("Water Temple MQ", "Master Quest", "Wonderitem"))),
+    ("Water Temple MQ 3 Water Spouts Proximity Wonderitem 2",        ("Wonderitem",   0x05,  (15,0,2), None,                        'Arrows (10)',                           ("Water Temple MQ", "Master Quest", "Wonderitem"))),
+    ("Water Temple MQ Freestanding Key Hookshot Wonderitem",         ("Wonderitem",   0x05,  (16,0,1), None,                        'Rupees (20)',                           ("Water Temple MQ", "Master Quest", "Wonderitem"))),
+    ("Water Temple MQ Longshot Chest Hookshot Wonderitem",           ("Wonderitem",   0x05,  (17,0,8), None,                        'Rupees (20)',                           ("Water Temple MQ", "Master Quest", "Wonderitem"))),
+    ("Water Temple MQ Compass Chest Hookshot Wonderitem",            ("Wonderitem",   0x05,  (18,0,4), None,                        'Rupees (20)',                           ("Water Temple MQ", "Master Quest", "Wonderitem"))),
+    ("Water Temple MQ Map Chest Hookshot Wonderitem",                ("Wonderitem",   0x05,  (19,0,6), None,                        'Rupees (20)',                           ("Water Temple MQ", "Master Quest", "Wonderitem"))),
+    ("Water Temple MQ Lizalfos Hallway Hookshot Wonderitem",         ("Wonderitem",   0x05,  (20,0,3), None,                        'Rupees (20)',                           ("Water Temple MQ", "Master Quest", "Wonderitem"))),
 
 
     # Water Temple Shared
@@ -1835,7 +1838,7 @@ location_table: dict[str, tuple[str, Optional[int], LocationDefault, LocationAdd
     ("Shadow Temple Invisible Spikes Silver Rupee Ledge",            ("SilverRupee",  0x07,  (11,0,3), None,                'Silver Rupee (Shadow Temple Invisible Spikes)', ("Shadow Temple", "Vanilla Dungeons", "Silver Rupees",))),
     ("Shadow Temple Invisible Spikes Silver Rupee Near Ledge",       ("SilverRupee",  0x07,  (11,0,7), None,                'Silver Rupee (Shadow Temple Invisible Spikes)', ("Shadow Temple", "Vanilla Dungeons", "Silver Rupees",))),
     # Shadow Temple Wonderitems
-    ("Shadow Temple 3 Spinning Pots Wonderitem",                     ("Wonderitem",   0x07, (12,0,2), None,                         'Arrows (10)',                           ("Shadow Temple", "Vanilla", "Wonderitem"))),
+    ("Shadow Temple 3 Spinning Pots Wonderitem",                     ("Wonderitem",   0x07, (12,0,2), None,                         'Arrows (10)',                           ("Shadow Temple", "Vanilla Dungeons", "Wonderitem"))),
 
     # Shadow Temple MQ
     ("Shadow Temple MQ Early Gibdos Chest",                          ("Chest",        0x07,  0x03, None,                            'Small Key (Shadow Temple)',             ("Shadow Temple MQ", "Master Quest", "Chests",))),
@@ -2212,9 +2215,9 @@ location_table: dict[str, tuple[str, Optional[int], LocationDefault, LocationAdd
     ("Gerudo Training Ground Boulder Room Silver Rupee Ledge",       ("SilverRupee",  0x0B,  (2,0,13), None,                 'Silver Rupee (Gerudo Training Ground Slopes)', ("Gerudo Training Ground", "Vanilla Dungeons", "Silver Rupees",))),
     ("Gerudo Training Ground Boulder Room Silver Rupee Top Left",    ("SilverRupee",  0x0B,  (2,0,14), None,                 'Silver Rupee (Gerudo Training Ground Slopes)', ("Gerudo Training Ground", "Vanilla Dungeons", "Silver Rupees",))),
     # Gerudo Training Ground Wonderitems
-    ("Gerudo Training Ground Eye Statue Wonderitem",                 ("Wonderitem",   0x0B,  (4,0,3), None,                         'Arrows (10)',                           ("Shadow Temple", "Vanilla", "Wonderitem"))),
-    ("Gerudo Training Ground Hammer Room Wonderitem",                ("Wonderitem",   0x0B,  (5,0,17), None,                         'Arrows (10)',                           ("Shadow Temple", "Vanilla", "Wonderitem"))),
-    ("Gerudo Training Ground Beamos Wonderitem",                     ("Wonderitem",   0x0B,  (7,0,13), None,                         'Arrows (10)',                           ("Shadow Temple", "Vanilla", "Wonderitem"))),
+    ("Gerudo Training Ground Eye Statue Wonderitem",                 ("Wonderitem",   0x0B,  (4,0,3), None,                         'Arrows (10)',                           ("Gerudo Training Ground", "Vanilla Dungeons", "Wonderitem"))),
+    ("Gerudo Training Ground Hammer Room Wonderitem",                ("Wonderitem",   0x0B,  (5,0,17), None,                        'Arrows (10)',                           ("Gerudo Training Ground", "Vanilla Dungeons", "Wonderitem"))),
+    ("Gerudo Training Ground Beamos Wonderitem",                     ("Wonderitem",   0x0B,  (7,0,13), None,                        'Arrows (10)',                           ("Gerudo Training Ground", "Vanilla Dungeons", "Wonderitem"))),
 
     # Gerudo Training Ground MQ
     ("Gerudo Training Ground MQ Lobby Left Chest",                   ("Chest",        0x0B,  0x13, None,                            'Arrows (10)',                           ("Gerudo Training Ground MQ", "Master Quest", "Chests",))),
@@ -2504,7 +2507,7 @@ location_groups: dict[str, list[str]] = {
     'Song': [name for (name, data) in location_table.items() if data[0] == 'Song'],
     'Chest': [name for (name, data) in location_table.items() if data[0] == 'Chest'],
     'Collectable': [name for (name, data) in location_table.items() if data[0] == 'Collectable'],
-    'Boss': [name for (name, data) in location_table.items() if data[0] == 'Boss'],
+    'Boss': [name for (name, data) in location_table.items() if data[0] == 'Boss' or name == 'ToT Reward from Rauru'],
     'ActorOverride': [name for (name, data) in location_table.items() if data[0] == 'ActorOverride'],
     'BossHeart': [name for (name, data) in location_table.items() if data[0] == 'BossHeart'],
     'CollectableLike': [name for (name, data) in location_table.items() if data[0] in ('Collectable', 'BossHeart', 'GS Token', 'SilverRupee')],
@@ -2516,6 +2519,9 @@ location_groups: dict[str, list[str]] = {
 }
 
 
-def location_is_viewable(loc_name: str, correct_chest_appearances: str, fast_chests: bool) -> bool:
-    return (((correct_chest_appearances in ('textures', 'both', 'classic') or not fast_chests) and loc_name in location_groups['Chest'])
-            or loc_name in location_groups['CanSee'])
+def location_is_viewable(loc_name: str, correct_chest_appearances: str, fast_chests: bool, *, world: Optional[World] = None) -> bool:
+    return (
+        ((correct_chest_appearances in ('textures', 'both', 'classic') or not fast_chests) and loc_name in location_groups['Chest'])
+        or loc_name in location_groups['CanSee']
+        or (world is not None and world.bigocto_location() is not None and world.bigocto_location().name == loc_name)
+    )
