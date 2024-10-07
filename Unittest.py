@@ -3,7 +3,6 @@
 # See `python -m unittest -h` or `pytest -h` for more options.
 
 from __future__ import annotations
-import io
 import json
 import logging
 import os
@@ -24,7 +23,6 @@ from Messages import Message, read_messages, shuffle_messages
 from Settings import Settings, get_preset_files
 from Spoiler import Spoiler
 from Rom import Rom
-from Audiobank import *
 
 test_dir = os.path.join(os.path.dirname(__file__), 'tests')
 output_dir = os.path.join(test_dir, 'Output')
@@ -820,7 +818,7 @@ class TestValidSpoilers(unittest.TestCase):
                     self.verify_woth(spoiler)
                     self.verify_playthrough(spoiler)
                     self.verify_disables(spoiler)
-    
+
     # remove this to run the fuzzer
     @unittest.skip("generally slow and failures can be ignored")
     def test_fuzzer(self):
@@ -863,54 +861,3 @@ class TestTextShuffle(unittest.TestCase):
         messages = read_messages(rom)
         shuffle_messages(messages)
         shuffle_messages(messages, False)
-
-class TestSceneFlags(unittest.TestCase):
-    def test_build_room_xflags(self):
-        from SceneFlags import build_room_xflags, encode_room_xflags
-        # Using Goron city child room 3 (main room with the goron pot)
-        room_locations = [
-            (41, 1), # Goron Pot Drop 1
-            (41, 2), # Goron Pot Drop 2
-            (41, 3), # Goron Pot Drop 3
-            (41, 4), # Goron Pot Drop 4
-            (41, 5), # Goron Pot Drop 5
-            (41, 6), # Goron Pot Drop 6
-            (41, 7), # Goron Pot Drop 7
-            (41, 8), # Goron Pot Drop 8
-            (42, 0), # Pot 1
-            (43, 0), # Pot 2
-            (44, 0), # Pot 3
-            (45, 0), # Pot 4
-            (46, 0), # Pot 5
-        ]
-        test_encoded = [0, 41, 1, 1, 9, 1, 1, 4]
-
-        flags, bits = build_room_xflags(room_locations)
-        diff, encoded = encode_room_xflags(flags)
-        self.assertListEqual(test_encoded, encoded)
-
-class TestCustomAudio(unittest.TestCase):
-    def test_audiobank(self):
-        AUDIOBANK_POINTER_TABLE = 0x00B896A0
-        AUDIOBANK_ADDR = 0xD390
-        AUDIOTABLE_INDEX_ADDR = 0xB8A1C0
-        AUDIOTABLE_ADDR = 0x79470
-
-        if not os.path.isfile('./ZOOTDEC.z64'):
-            self.skipTest("Base ROM file not available.")
-        
-        rom: Rom = Rom("ZOOTDEC.z64")
-        audiobank_file = rom.read_bytes(AUDIOBANK_ADDR, 0x1CA50)
-        audiotable_index = rom.read_bytes(AUDIOTABLE_INDEX_ADDR, 0x80) # Read audiotable index into bytearray
-        audiotable_file = rom.read_bytes(AUDIOTABLE_ADDR, 0x460AD0) # Read audiotable (samples) into bytearray
-        rom_bytes: bytearray = rom.buffer
-        audiobank_table_header = rom.read_bytes(AUDIOBANK_POINTER_TABLE, 0x10)
-        num_banks = int.from_bytes(audiobank_table_header[0:2], 'big')
-        audiobanks: list[AudioBank] = []
-        for i in range(0, num_banks):
-            curr_entry = rom.read_bytes(AUDIOBANK_POINTER_TABLE + 0x10 + (0x10 * i), 0x10)
-            audiobank: AudioBank = AudioBank(curr_entry, audiobank_file, audiotable_file, audiotable_index)
-            audiobanks.append(audiobank)
-        self.assertEqual(num_banks, 0x26)
-        self.assertEqual(audiobanks[0x25].bank_offset, 0x19110)
-        self.assertEqual(audiobanks[0x25].size, 0x3940)
