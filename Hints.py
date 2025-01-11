@@ -177,7 +177,7 @@ def is_restricted_dungeon_item(item: Item) -> bool:
         return False
     return (
         ((item.map or item.compass) and item.world.settings.shuffle_mapcompass == 'dungeon') or
-        (item.type == 'SmallKey' and item.world.settings.shuffle_smallkeys == 'dungeon') or
+        (item.type in ('SmallKey', 'SmallKeyRing') and item.world.settings.shuffle_smallkeys == 'dungeon') or
         (item.type == 'BossKey' and item.world.settings.shuffle_bosskeys == 'dungeon') or
         (item.type == 'GanonBossKey' and item.world.settings.shuffle_ganon_bosskey == 'dungeon') or
         (item.type == 'SilverRupee' and item.world.settings.shuffle_silver_rupees == 'dungeon') or
@@ -441,7 +441,7 @@ class HintArea(Enum):
             else:
                 parent_region = current_spot.parent_region
 
-            if parent_region.hint and (original_parent.name == 'Root' or parent_region.name != 'Root'):
+            if (parent_region.hint or (use_alt_hint and parent_region.alt_hint)) and (original_parent.name == 'Root' or parent_region.name != 'Root'):
                 if use_alt_hint and parent_region.alt_hint:
                     return parent_region.alt_hint
                 return parent_region.hint
@@ -1170,9 +1170,9 @@ def get_important_check_hint(spoiler: Spoiler, world: World, checked: set[str]) 
                 or location.item.name == 'Biggoron Sword'
                 or location.item.name == 'Double Defense'
                 # Handle make keys not in own dungeon major items
-                or (location.item.type == 'SmallKey' and not (world.settings.shuffle_smallkeys == 'dungeon' or world.settings.shuffle_smallkeys == 'vanilla'))
-                or (location.item.type == 'HideoutSmallKey' and not world.settings.shuffle_hideoutkeys == 'vanilla')
-                or (location.item.type == 'TCGSmallKey' and not world.settings.shuffle_tcgkeys == 'vanilla')
+                or (location.item.type in ('SmallKey', 'SmallKeyRing') and not (world.settings.shuffle_smallkeys == 'dungeon' or world.settings.shuffle_smallkeys == 'vanilla'))
+                or (location.item.type in ('HideoutSmallKey', 'HideoutSmallKeyRing') and not world.settings.shuffle_hideoutkeys == 'vanilla')
+                or (location.item.type in ('TCGSmallKey', 'TCGSmallKeyRing') and not world.settings.shuffle_tcgkeys == 'vanilla')
                 or (location.item.type == 'BossKey' and not (world.settings.shuffle_bosskeys == 'dungeon' or world.settings.shuffle_bosskeys == 'vanilla'))
                 or (location.item.type == 'GanonBossKey' and not (world.settings.shuffle_ganon_bosskey == 'vanilla'
                     or world.settings.shuffle_ganon_bosskey == 'dungeon' or world.settings.shuffle_ganon_bosskey == 'on_lacs'
@@ -1281,8 +1281,11 @@ def build_gossip_hints(spoiler: Spoiler, worlds: list[World]) -> None:
     # Add misc. item hint locations to "checked" locations if the respective hint is reachable without the hinted item.
     for world in worlds:
         for location in world.hinted_dungeon_reward_locations.values():
+            if location is None:
+                # ignore starting items
+                continue
             if world.settings.enhance_map_compass:
-                if world.mixed_pools_bosses or world.settings.shuffle_dungeon_rewards not in ('vanilla', 'reward'):
+                if world.entrance_rando_reward_hints:
                     # In these settings, there is not necessarily one dungeon reward in each dungeon,
                     # so we instead have each compass hint the area of its dungeon's vanilla reward.
                     compass_locations = [
@@ -1711,7 +1714,11 @@ def build_boss_string(reward: str, color: str, world: World) -> str:
             text = GossipText(f"\x08\x13{item_icon}One in #@'s pocket#...", [color], prefix='')
     else:
         location = world.hinted_dungeon_reward_locations[reward]
-        location_text = HintArea.at(location).text(world.settings.clearer_hints, preposition=True, world=None if location.world.id == world.id else location.world.id + 1)
+        if location is None:
+            hint_area = HintArea.ROOT
+        else:
+            hint_area = HintArea.at(location)
+        location_text = hint_area.text(world.settings.clearer_hints, preposition=True, world=None if location.world.id == world.id else location.world.id + 1)
         text = GossipText(f"\x08\x13{item_icon}One {location_text}...", [color], prefix='')
     return str(text) + '\x04'
 
@@ -1824,15 +1831,31 @@ def build_misc_item_hints(world: World, messages: list[Message], allow_duplicate
 def build_misc_location_hints(world: World, messages: list[Message]) -> None:
     for hint_type, data in misc_location_hint_table.items():
         text = data['location_fallback']
-        if hint_type in world.settings.misc_hints:
-            if hint_type in world.misc_hint_location_items:
-                item = world.misc_hint_location_items[hint_type]
+        if hint_type == 'big_poes':
+            # Special cased because we need to insert the big poes number.
+            item = world.misc_hint_location_items[hint_type]
+            poe_points = world.settings.big_poe_count * 100
+            
+            # Private hack: add player ID to misc hints (Skulls and Frogs 2)
+            optional_player_text = "" if (world.id == item.world.id) else f" for Player {item.world.id + 1}"
 
-                # Private hack: add player ID to misc hints (Skulls and Frogs 2)
-                optional_player_text = "" if (world.id == item.world.id) else f" for Player {item.world.id + 1}"
+            if hint_type in world.settings.misc_hints:
+                text = data['location_text'].format(item=get_hint(get_item_generic_name(item),
+                                                                    world.settings.clearer_hints).text, poe_points=poe_points, optional_player_text=optional_player_text)
+            else:
+                text = data['location_fallback'].format(poe_points=poe_points)
+            update_message_by_id(messages, data['id'], text)
+            return
+        else:
+            if hint_type in world.settings.misc_hints:
+                if hint_type in world.misc_hint_location_items:
+                    item = world.misc_hint_location_items[hint_type]
 
-                text = data['location_text'].format(item=get_hint(get_item_generic_name(item), world.settings.clearer_hints).text,
-                                                    optional_player_text=optional_player_text)
+                    # Private hack: add player ID to misc hints (Skulls and Frogs 2)
+                    optional_player_text = "" if (world.id == item.world.id) else f" for Player {item.world.id + 1}"
+
+                    text = data['location_text'].format(item=get_hint(get_item_generic_name(item),
+                                                                        world.settings.clearer_hints).text, optional_player_text=optional_player_text)
 
         update_message_by_id(messages, data['id'], str(GossipText(text, ['Green'], prefix='')), 0x23)
 
