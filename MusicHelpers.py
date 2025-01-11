@@ -84,8 +84,7 @@ def process_sequence_mmrs(filepath: str, file_name: str, seq_type: str, include_
                 instrument_set = '-'
             else:
                 instrument_set = int(seq_file.split(".zseq")[0], 16) # Get the instrument set from the .zseq file name
-            split = file_name.split('.mmrs')
-            cosmetic_name = split[0]
+            cosmetic_name = filepath
             # Create new sequence
             seq = Sequence(filepath, cosmetic_name, seq_type=seq_type, seq_file = seq_file, instrument_set = instrument_set)
             if zbank_file:
