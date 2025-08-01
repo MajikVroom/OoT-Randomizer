@@ -1,6 +1,28 @@
 # Dev
 
 ## New Settings and Options
+* New settings for more control over special deal prices.
+* The `Randomize Ocarina Melodies` setting has a new option to randomize the Frogs 2 melody.
+* The `Free Scarecrow's Song` setting has been renamed to `Scarecrow Behavior`, with a new `Fast` option.
+* New options `Deku Theater Skull Mask` and `Deku Theater Mask of Truth` for the `Misc. Hints` setting.
+* New setting `Shuffle 100 Skulltula Reward` along with a new `House of Skulltula: 100` option for the `Misc. Hints` setting.
+* Glitched logic has been renamed to `Advanced` and been revamped to work with any settings, including Entrance Randomization.
+* A slew of advanced tricks and glitches have been added for the new `Advanced` logic setting.
+* The `Open Door of Time` setting has been renamed to `Door of Time`, with new options to require the Spiritual Stones and/or the Ocarina of Time.
+
+## Bug fixes
+* The Deku Shield pot in the Spirit Temple is no longer shuffled when both `Fix Broken Drops` and `Include Empty Pots` are off.
+* For consistency with other location types, excluded pot/crate/beehive/wonderitem/etc. locations no longer behave as if their shuffle setting was off.
+* The Triforce Piece counter display has been moved to a CRT-safe position.
+
+## Other changes
+* Big poe souls can now be collected while riding Epona.
+* Ice traps have a new item model that's displayed instead of nothing after being picked up.
+* The professor in the lakeside lab now only takes 1 second instead of 6 to prepare the eyeball frog.
+
+# 8.3
+
+## New Settings and Options
 * New options `Custom (count)` and `Custom (%)` for the `Ice Traps` setting.
 * New hidden `plandomized_locations` setting to allow presets to place specific items at specific locations.
 * New setting to speed up the boat ride in the Shadow Temple.
@@ -30,6 +52,7 @@
 * Fix the “VC Crash” bug.
 * Fix Spirit Temple music not resuming after Nabooru is defeated.
 * Fix Grog not spawning when Odd Mushroom reverts on savewarp.
+* Fix some settings on the `Main Rules` tab not being disabled when `Randomize Main Rule Settings` is enabled.
 
 ## New Speedups
 * The first text box from each carpenter in the Thieves' Hideout is skipped.
@@ -38,7 +61,8 @@
 
 ## Other Changes
 * Now supports custom music written for the Majora's Mask Randomizer.
-* New Magic Meter item model to allow magic drops to be shuffled in the future.
+* New Magic Meter item models to allow magic drops to be shuffled in the future.
+* Add a smoke effect to Deku Stick Capacity and Deku Nut Capacity items to distinguish them from refills.
 * Seeds rolled on ootrandomizer.com display their ID in the top left corner of the file select screen.
 * The `Other` tab of the generator has been rearranged for better grouping of settings, and the `One Major Item per Dungeon` setting has been moved there since it was causing frequent failures with `Randomize Main Rule Settings`.
 * Biggoron's text after turning in the Eyedrops has been changed to avoid potential confusion.
