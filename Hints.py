@@ -1890,20 +1890,29 @@ def build_misc_dual_hints(world: World, messages: list[Message]) -> None:
     for (hint_type1, hint_type2), data in misc_dual_hint_table.items():
         item_1 = world.misc_hint_location_items[hint_type1]
         item_2 = world.misc_hint_location_items[hint_type2]
+
+        # Private hack: add player ID to misc hints (Skulls and Frogs 2)
+        optional_player_text_1 = "" if (world.id == item_1.world.id) else f" for Player {item_1.world.id + 1}"
+        optional_player_text_2 = "" if (world.id == item_2.world.id) else f" for Player {item_2.world.id + 1}"
+
         if hint_type1 in world.settings.misc_hints and hint_type1 in world.misc_hint_location_items:
             if hint_type2 in world.settings.misc_hints and hint_type2 in world.misc_hint_location_items:
                 text = data['location_text'].format(
                     item_1=get_hint(get_item_generic_name(item_1), world.settings.clearer_hints).text,
                     item_2=get_hint(get_item_generic_name(item_2), world.settings.clearer_hints).text,
+                    optional_player_text_1=optional_player_text_1,
+                    optional_player_text_2=optional_player_text_2,
                 )
             else:
                 text = misc_location_hint_table[hint_type1]['location_text'].format(
                     item=get_hint(get_item_generic_name(item_1), world.settings.clearer_hints).text,
+                    optional_player_text=optional_player_text_1,
                 )
         else:
             if hint_type2 in world.settings.misc_hints and hint_type2 in world.misc_hint_location_items:
                 text = misc_location_hint_table[hint_type2]['location_text'].format(
                     item=get_hint(get_item_generic_name(item_2), world.settings.clearer_hints).text,
+                    optional_player_text=optional_player_text_2,
                 )
             else:
                 text = data['location_fallback']

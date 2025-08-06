@@ -1914,7 +1914,7 @@ misc_location_hint_table: dict[str, dict[str, Any]] = {
         'id': 0x9009,
         'hint_location': '100 Skulltulas Reward Hint',
         'item_location': 'Kak 100 Gold Skulltula Reward',
-        'location_text': "Yeaaarrgh! I'm cursed!! Please save me by destroying \x05\x41100 Spiders of the Curse\x05\x40 and I will give you \x05\x42{item}\x05\x40.",
+        'location_text': "Yeaaarrgh! I'm cursed!! Please save me by destroying \x05\x41100 Spiders of the Curse\x05\x40 and I will give you \x05\x42{item}\x05\x40{optional_player_text}.",
         'location_fallback': "Yeaaarrgh! I'm cursed!!",
         'text_style': 0x23,
     },
@@ -1930,14 +1930,14 @@ misc_location_hint_table: dict[str, dict[str, Any]] = {
         'id': 0x0344,
         'hint_location': 'Deku Theater Skull Mask Hint',
         'item_location': 'Deku Theater Skull Mask',
-        'location_text': 'Wearing the \x05\x41Skull Mask\x05\x40 will reward you with \x05\x42{item}\x05\x40.',
+        'location_text': 'Wearing the \x05\x41Skull Mask\x05\x40 will reward you with \x05\x42{item}\x05\x40{optional_player_text}.',
         'text_style': 0x13,
     },
     'mask_of_truth': {
         'id': 0x0344,
         'hint_location': 'Deku Theater Mask of Truth Hint',
         'item_location': 'Deku Theater Mask of Truth',
-        'location_text': 'Wearing the \x05\x41Mask of Truth\x05\x40 will reward you with \x05\x42{item}\x05\x40.',
+        'location_text': 'Wearing the \x05\x41Mask of Truth\x05\x40 will reward you with \x05\x42{item}\x05\x40{optional_player_text}.',
         'text_style': 0x13,
     },
     'big_poes': {
@@ -1956,7 +1956,7 @@ misc_location_hint_table: dict[str, dict[str, Any]] = {
 misc_dual_hint_table: dict[str, dict[str, Any]] = {
     ('skull_mask', 'mask_of_truth'): {
         'id': 0x0344,
-        'location_text': '\x01Wearing the \x05\x41Skull Mask\x05\x40 will reward you with \x05\x42{item_1}\x05\x40.\x04Wearing the \x05\x41Mask of Truth\x05\x40 will reward you with \x05\x42{item_2}\x05\x40.',
+        'location_text': '\x01Wearing the \x05\x41Skull Mask\x05\x40 will reward you with \x05\x42{item_1}\x05\x40{optional_player_text_1}.\x04Wearing the \x05\x41Mask of Truth\x05\x40 will reward you with \x05\x42{item_2}\x05\x40{optional_player_text_2}.',
         'location_fallback': '\x05\x42\x06\x3dForest Stage\x04\x01\x05\x40\x06\x14We are waiting to see your\x01\x06\x32beautiful face!\x01\x06\x28Win fabulous prizes!',
         'text_style': 0x13,
     },
