@@ -1231,11 +1231,12 @@ class SettingInfos:
             required to access the Deku Tree. Items needed for this will be
             guaranteed inside the forest area. This setting is incompatible
             with starting as adult, and so Starting Age will be locked to Child.
-            With either "Shuffle Interior Entrances" set to "All", "Shuffle
-            Overworld Entrances" on, "Randomize Warp Song Destinations" on
-            or "Randomize Overworld Spawns" on, Closed Forest will instead
-            be treated as Closed Deku with starting age Child and WILL NOT
-            guarantee that these items are available in the forest area.
+            With any of "Shuffle Interior Entrances" set to "All", "Shuffle
+            Overworld Entrances" on, "Randomize Warp Song Destinations" on,
+            "Randomize Overworld Spawns" on, or "Shuffle Grottos" in Advanced
+            Logic, Closed Forest will instead be treated as Closed Deku with
+            starting age Child and WILL NOT guarantee that these items are
+            available in the forest area.
         ''',
         shared         = True,
         disable        = {
@@ -3108,13 +3109,25 @@ class SettingInfos:
         shared          = True,
     )
 
-    enhance_map_compass = Checkbutton(
+    enhance_map_compass = MultipleSelect(
         gui_text       = 'Maps and Compasses Give Information',
+        choices        = {
+            'map_mq':                'Map gives MQ info',
+            'map_dungeon_location':  'Map gives dungeon location',
+            'compass_boss_location': 'Compass gives boss location',
+            'compass_reward':        'Compass gives reward info',
+        },
+        default         = [],
         gui_tooltip    = '''\
             Gives the Map and Compass extra functionality.
-            Map will tell if a dungeon is vanilla or Master Quest.
-            Compass will tell what medallion or stone is within.
-            The Temple of Time Altar will no longer provide
+
+            Map can be enhanced to tell if a dungeon is vanilla or Master Quest,
+            and to give dungeon locations if Dungeon entrance shuffle is enabled.
+
+            Compass can be enhanced to reveal which boss is in the corresponding dungeon
+            if Boss entrance shuffle is enabled,
+            or to tell what medallion or stone is within.
+            If compass is enabled, the Temple of Time Altar will no longer provide
             information on the location of medallions and stones.
 
             'Maps/Compasses: Remove': The dungeon information is
@@ -3123,7 +3136,6 @@ class SettingInfos:
             'Maps/Compasses: Start With': The dungeon information
             is available immediately from the dungeon menu.
         ''',
-        default        = False,
         shared         = True,
         gui_params     = {
             'randomize_key': 'randomize_settings',
@@ -3252,6 +3264,47 @@ class SettingInfos:
         gui_tooltip    = '''\
             Begin the game with the selected songs already learnt.
         ''',
+    )
+
+    add_random_starting_items = Checkbutton(
+        gui_text         = 'Additional Random Starting Items',
+        gui_tooltip      = '''\
+            Begin the game with a configurable amount of randomly selected items in
+            addition to your selections from the tables.
+        ''',
+        disable          = {
+            False: {'settings': ['random_starting_items_exclude', 'random_starting_items_count']}
+        },
+        shared           = True,
+    )
+
+    random_starting_items_exclude = MultipleSelect(
+        gui_text         = 'Exclude Item Types',
+        gui_tooltip      = '''\
+            Selections here will be excluded from the random starting item pool.
+        ''',
+        choices          = {
+            'songs':           'Songs',
+            'bombchus':        'Bombchus',
+            'shields':         'Deku/Hylian Shields',
+            'deku_upgrades':   'Deku Stick/Nut Upgrades',
+            'health_upgrades': 'Health Upgrades',
+            'junk':            'Junk Items',
+        },
+        default          = [],
+        disabled_default = [],
+        shared           = True,
+    )
+
+    random_starting_items_count = Scale(
+        gui_text         = 'Amount of Items',
+        gui_tooltip      = '''\
+            Configure the amount of random items to start with.
+        ''',
+        default          = 0,
+        minimum          = 0,
+        maximum          = 10,
+        shared           = True,
     )
 
     start_with_consumables = Checkbutton(

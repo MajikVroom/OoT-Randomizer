@@ -106,7 +106,7 @@
         "shuffle_silver_rupees": "vanilla",
         "silver_rupee_pouches_choice": "off",
         "silver_rupee_pouches": [],
-        "enhance_map_compass": false,
+        "enhance_map_compass": [],
         "logic_no_night_tokens_without_suns_song": true,
         "disabled_locations": [
             "Deku Theater Mask of Truth",
@@ -121,6 +121,9 @@
             "zeldas_letter"
         ],
         "starting_songs": [],
+        "add_random_starting_items": false,
+        "random_starting_items_exclude": [],
+        "random_starting_items_count": 0,
         "start_with_consumables": true,
         "start_with_rupees": true,
         "starting_hearts": 3,
@@ -199,13 +202,13 @@
         "custom_ice_trap_count": 100,
         "ice_trap_appearance": "junk_only"
     },
-    "S8 Tournament": {
+    "S9 Tournament": {
         "aliases": [
-            "s8",
+            "s9",
             "tournament"
         ],
         "show_seed_info": true,
-        "user_message": "S8 Tournament",
+        "user_message": "S9 Tournament",
         "world_count": 1,
         "create_spoiler": true,
         "password_lock": false,
@@ -254,7 +257,7 @@
         "shuffle_hideout_entrances": false,
         "shuffle_gerudo_fortress_heart_piece": "remove",
         "shuffle_grotto_entrances": false,
-        "shuffle_dungeon_entrances": "off",
+        "shuffle_dungeon_entrances": "simple",
         "shuffle_bosses": "off",
         "shuffle_ganon_tower": false,
         "shuffle_overworld_entrances": false,
@@ -309,7 +312,10 @@
         "shuffle_silver_rupees": "vanilla",
         "silver_rupee_pouches_choice": "off",
         "silver_rupee_pouches": [],
-        "enhance_map_compass": false,
+        "enhance_map_compass": [
+            "map_dungeon_location",
+            "compass_reward"
+        ],
         "logic_no_night_tokens_without_suns_song": false,
         "disabled_locations": [
             "Deku Theater Mask of Truth"
@@ -330,7 +336,9 @@
             "logic_lens_bongo",
             "logic_lens_spirit",
             "logic_lens_gtg",
-            "logic_lens_castle"
+            "logic_lens_castle",
+            "logic_deku_b1_webs_with_bow",
+            "logic_dc_scarecrow_gs"
         ],
         "advanced_allowed_tricks": [],
         "starting_equipment": [
@@ -341,6 +349,15 @@
             "zeldas_letter"
         ],
         "starting_songs": [],
+        "add_random_starting_items": true,
+        "random_starting_items_exclude": [
+            "bombchus",
+            "shields",
+            "deku_upgrades",
+            "health_upgrades",
+            "junk"
+        ],
+        "random_starting_items_count": 1,
         "start_with_consumables": true,
         "start_with_rupees": false,
         "starting_hearts": 3,
@@ -352,7 +369,7 @@
         "complete_mask_quest": false,
         "useful_cutscenes": false,
         "fast_chests": true,
-        "scarecrow_behavior": "vanilla",
+        "scarecrow_behavior": "fast",
         "fast_bunny_hood": true,
         "auto_equip_masks": false,
         "plant_beans": false,
@@ -374,6 +391,7 @@
             "altar",
             "ganondorf",
             "warp_songs_and_owls",
+            "dampe_diary",
             "30_skulltulas",
             "40_skulltulas",
             "50_skulltulas"
@@ -400,7 +418,7 @@
         "starting_tod": "default",
         "blue_fire_arrows": true,
         "fix_broken_drops": false,
-        "tcg_requires_lens": false,
+        "tcg_requires_lens": true,
         "no_collectible_hearts": false,
         "one_item_per_dungeon": false,
         "item_pool_value": "balanced",
@@ -409,13 +427,13 @@
         "custom_ice_trap_count": 100,
         "ice_trap_appearance": "anything"
     },
-    "Standard Weekly (2025-06-07)": {
+    "Standard Weekly (2025-09-13)": {
         "aliases": [
             "Standard Weekly (Latest)",
             "weekly"
         ],
         "show_seed_info": true,
-        "user_message": "Standard Weekly (2025-06-07)",
+        "user_message": "Standard Weekly (2025-09-13)",
         "world_count": 1,
         "create_spoiler": true,
         "password_lock": false,
@@ -450,18 +468,18 @@
         "open_door_of_time": "open",
         "zora_fountain": "closed",
         "gerudo_fortress": "fast",
-        "dungeon_shortcuts_choice": "off",
-        "dungeon_shortcuts": [],
+        "dungeon_shortcuts_choice": "choice",
+        "dungeon_shortcuts": [
+            "Jabu Jabus Belly",
+            "Forest Temple"
+        ],
         "starting_age": "random",
         "mq_dungeons_mode": "vanilla",
         "mq_dungeons_specific": [],
         "mq_dungeons_count": 0,
-        "empty_dungeons_mode": "rewards",
+        "empty_dungeons_mode": "count",
         "empty_dungeons_specific": [],
-        "empty_dungeons_rewards": [
-            "Shadow Medallion",
-            "Spirit Medallion"
-        ],
+        "empty_dungeons_rewards": [],
         "empty_dungeons_count": 2,
         "shuffle_interior_entrances": "off",
         "shuffle_hideout_entrances": false,
@@ -479,7 +497,7 @@
             "adult"
         ],
         "free_bombchu_drops": false,
-        "shuffle_song_items": "song",
+        "shuffle_song_items": "dungeon",
         "shopsanity": "off",
         "special_deal_price_distribution": "betavariate",
         "special_deal_price_min": 0,
@@ -519,11 +537,14 @@
         "key_rings_choice": "off",
         "key_rings": [],
         "keyring_give_bk": false,
-        "shuffle_bosskeys": "dungeon",
+        "shuffle_bosskeys": "vanilla",
         "shuffle_silver_rupees": "vanilla",
         "silver_rupee_pouches_choice": "off",
         "silver_rupee_pouches": [],
-        "enhance_map_compass": false,
+        "enhance_map_compass": [
+            "map_mq",
+            "compass_reward"
+        ],
         "logic_no_night_tokens_without_suns_song": false,
         "disabled_locations": [
             "Deku Theater Mask of Truth"
@@ -554,7 +575,12 @@
             "ocarina",
             "zeldas_letter"
         ],
-        "starting_songs": [],
+        "starting_songs": [
+            "prelude"
+        ],
+        "add_random_starting_items": false,
+        "random_starting_items_exclude": [],
+        "random_starting_items_count": 0,
         "start_with_consumables": true,
         "start_with_rupees": false,
         "starting_hearts": 3,
@@ -569,7 +595,7 @@
         "scarecrow_behavior": "free",
         "fast_bunny_hood": true,
         "auto_equip_masks": false,
-        "plant_beans": true,
+        "plant_beans": false,
         "easier_fire_arrow_entry": false,
         "fae_torch_count": 3,
         "ruto_already_f1_jabu": true,
@@ -583,9 +609,7 @@
         "hint_dist": "weekly",
         "item_hints": [],
         "hint_dist_user": {},
-        "plandomized_locations": {
-            "ToT Reward from Rauru": "Light Medallion"
-        },
+        "plandomized_locations": {},
         "misc_hints": [
             "altar",
             "ganondorf",
@@ -606,7 +630,7 @@
         "minor_items_as_major_chest": [],
         "invisible_chests": false,
         "correct_potcrate_appearances": "off",
-        "key_appearance_match_dungeon": true,
+        "key_appearance_match_dungeon": false,
         "potcrate_textures_specific": [],
         "soa_unlocks_potcrate_texture": false,
         "ocarina_songs": [],
@@ -616,7 +640,7 @@
         "starting_tod": "default",
         "blue_fire_arrows": true,
         "fix_broken_drops": false,
-        "tcg_requires_lens": true,
+        "tcg_requires_lens": false,
         "no_collectible_hearts": false,
         "one_item_per_dungeon": false,
         "item_pool_value": "balanced",
@@ -733,7 +757,7 @@
         "shuffle_silver_rupees": "vanilla",
         "silver_rupee_pouches_choice": "off",
         "silver_rupee_pouches": [],
-        "enhance_map_compass": false,
+        "enhance_map_compass": [],
         "logic_no_night_tokens_without_suns_song": false,
         "disabled_locations": [
             "Deku Theater Mask of Truth"
@@ -769,6 +793,9 @@
             "zeldas_letter"
         ],
         "starting_songs": [],
+        "add_random_starting_items": false,
+        "random_starting_items_exclude": [],
+        "random_starting_items_count": 0,
         "start_with_consumables": false,
         "start_with_rupees": false,
         "starting_hearts": 3,
@@ -953,13 +980,25 @@
         "shuffle_silver_rupees": "vanilla",
         "silver_rupee_pouches_choice": "off",
         "silver_rupee_pouches": [],
-        "enhance_map_compass": true,
+        "enhance_map_compass": [
+            "map_mq",
+            "compass_reward"
+        ],
         "logic_no_night_tokens_without_suns_song": false,
         "disabled_locations": [
+            "Sheik at Temple",
             "Deku Theater Mask of Truth",
             "Kak 40 Gold Skulltula Reward",
             "Kak 50 Gold Skulltula Reward",
-            "GF HBA 1500 Points"
+            "GF HBA 1500 Points",
+            "Ganons Castle Light Trial First Left Chest",
+            "Ganons Castle Light Trial Second Left Chest",
+            "Ganons Castle Light Trial Third Left Chest",
+            "Ganons Castle Light Trial First Right Chest",
+            "Ganons Castle Light Trial Second Right Chest",
+            "Ganons Castle Light Trial Third Right Chest",
+            "Ganons Castle Light Trial Invisible Enemies Chest",
+            "Ganons Castle Light Trial Lullaby Chest"
         ],
         "allowed_tricks": [
             "logic_fewer_tunic_requirements",
@@ -979,19 +1018,25 @@
         ],
         "advanced_allowed_tricks": [],
         "starting_equipment": [
-            "deku_shield"
+            "deku_shield",
+            "hylian_shield",
+            "defense"
         ],
         "starting_inventory": [
             "ocarina",
+            "farores_wind",
             "lens",
             "zeldas_letter"
         ],
         "starting_songs": [
             "prelude"
         ],
+        "add_random_starting_items": false,
+        "random_starting_items_exclude": [],
+        "random_starting_items_count": 0,
         "start_with_consumables": true,
-        "start_with_rupees": true,
-        "starting_hearts": 4,
+        "start_with_rupees": false,
+        "starting_hearts": 3,
         "skip_reward_from_rauru": true,
         "no_escape_sequence": true,
         "no_guard_stealth": true,
@@ -1007,7 +1052,7 @@
         "easier_fire_arrow_entry": false,
         "fae_torch_count": 3,
         "ruto_already_f1_jabu": true,
-        "fast_shadow_boat": false,
+        "fast_shadow_boat": true,
         "chicken_count_random": false,
         "chicken_count": 3,
         "big_poe_count_random": false,
@@ -1022,9 +1067,10 @@
             "ganondorf",
             "20_skulltulas",
             "30_skulltulas",
-            "warp_songs_and_owls"
+            "warp_songs_and_owls",
+            "big_poes"
         ],
-        "correct_chest_appearances": "textures",
+        "correct_chest_appearances": "both",
         "chest_textures_specific": [
             "major",
             "bosskeys",
@@ -1036,7 +1082,7 @@
         "minor_items_as_major_chest": [],
         "invisible_chests": false,
         "correct_potcrate_appearances": "textures_unchecked",
-        "key_appearance_match_dungeon": false,
+        "key_appearance_match_dungeon": true,
         "potcrate_textures_specific": [
             "major",
             "bosskeys",
@@ -1050,9 +1096,9 @@
         "damage_multiplier": "normal",
         "deadly_bonks": "none",
         "starting_tod": "default",
-        "blue_fire_arrows": false,
+        "blue_fire_arrows": true,
         "fix_broken_drops": false,
-        "tcg_requires_lens": false,
+        "tcg_requires_lens": true,
         "no_collectible_hearts": false,
         "one_item_per_dungeon": false,
         "item_pool_value": "balanced",
@@ -1166,7 +1212,10 @@
         "shuffle_silver_rupees": "vanilla",
         "silver_rupee_pouches_choice": "off",
         "silver_rupee_pouches": [],
-        "enhance_map_compass": true,
+        "enhance_map_compass": [
+            "map_mq",
+            "compass_reward"
+        ],
         "logic_no_night_tokens_without_suns_song": false,
         "disabled_locations": [
             "Deku Theater Mask of Truth",
@@ -1203,6 +1252,9 @@
             "zeldas_letter"
         ],
         "starting_songs": [],
+        "add_random_starting_items": false,
+        "random_starting_items_exclude": [],
+        "random_starting_items_count": 0,
         "start_with_consumables": true,
         "start_with_rupees": true,
         "starting_hearts": 3,
@@ -1387,7 +1439,10 @@
         "shuffle_silver_rupees": "vanilla",
         "silver_rupee_pouches_choice": "off",
         "silver_rupee_pouches": [],
-        "enhance_map_compass": true,
+        "enhance_map_compass": [
+            "map_mq",
+            "compass_reward"
+        ],
         "logic_no_night_tokens_without_suns_song": false,
         "disabled_locations": [
             "Deku Theater Mask of Truth",
@@ -1428,6 +1483,9 @@
         "starting_songs": [
             "prelude"
         ],
+        "add_random_starting_items": false,
+        "random_starting_items_exclude": [],
+        "random_starting_items_count": 0,
         "start_with_consumables": true,
         "start_with_rupees": false,
         "starting_hearts": 3,
@@ -1634,7 +1692,10 @@
         "shuffle_silver_rupees": "anywhere",
         "silver_rupee_pouches_choice": "off",
         "silver_rupee_pouches": [],
-        "enhance_map_compass": true,
+        "enhance_map_compass": [
+            "map_mq",
+            "compass_reward"
+        ],
         "logic_no_night_tokens_without_suns_song": false,
         "disabled_locations": [],
         "allowed_tricks": [
@@ -1829,6 +1890,9 @@
         "starting_equipment": [],
         "starting_inventory": [],
         "starting_songs": [],
+        "add_random_starting_items": false,
+        "random_starting_items_exclude": [],
+        "random_starting_items_count": 0,
         "start_with_consumables": false,
         "start_with_rupees": false,
         "starting_hearts": 3,
@@ -2007,7 +2071,7 @@
         "shuffle_silver_rupees": "vanilla",
         "silver_rupee_pouches_choice": "off",
         "silver_rupee_pouches": [],
-        "enhance_map_compass": false,
+        "enhance_map_compass": [],
         "logic_no_night_tokens_without_suns_song": false,
         "disabled_locations": [
             "Deku Theater Mask of Truth",
@@ -2029,6 +2093,9 @@
         "starting_equipment": [],
         "starting_inventory": [],
         "starting_songs": [],
+        "add_random_starting_items": false,
+        "random_starting_items_exclude": [],
+        "random_starting_items_count": 0,
         "start_with_consumables": false,
         "start_with_rupees": false,
         "starting_hearts": 3,
@@ -2100,13 +2167,13 @@
         "custom_ice_trap_count": 100,
         "ice_trap_appearance": "junk_only"
     },
-    "League S7": {
+    "League S9": {
         "aliases": [
             "league",
-            "league_s7"
+            "league_s9"
         ],
         "show_seed_info": true,
-        "user_message": "OoTR League S7",
+        "user_message": "OoTR League S9",
         "world_count": 1,
         "create_spoiler": true,
         "password_lock": false,
@@ -2129,7 +2196,7 @@
         "bridge_tokens": 100,
         "bridge_hearts": 20,
         "trials_random": false,
-        "trials": 0,
+        "trials": 2,
         "shuffle_ganon_bosskey": "medallions",
         "ganon_bosskey_medallions": 6,
         "ganon_bosskey_stones": 3,
@@ -2168,12 +2235,12 @@
         ],
         "free_bombchu_drops": false,
         "shuffle_song_items": "song",
-        "shopsanity": "off",
+        "shopsanity": "4",
         "special_deal_price_distribution": "betavariate",
         "special_deal_price_min": 0,
-        "special_deal_price_max": 300,
+        "special_deal_price_max": 200,
         "tokensanity": "off",
-        "shuffle_scrubs": "low",
+        "shuffle_scrubs": "off",
         "shuffle_child_trade": [],
         "adult_trade_shuffle": false,
         "adult_trade_start": [
@@ -2194,7 +2261,7 @@
         "shuffle_ocarinas": false,
         "shuffle_gerudo_card": false,
         "shuffle_beans": false,
-        "shuffle_expensive_merchants": false,
+        "shuffle_expensive_merchants": true,
         "shuffle_frog_song_rupees": false,
         "shuffle_100_skulltula_rupee": false,
         "shuffle_loach_reward": "off",
@@ -2211,20 +2278,11 @@
         "shuffle_silver_rupees": "vanilla",
         "silver_rupee_pouches_choice": "off",
         "silver_rupee_pouches": [],
-        "enhance_map_compass": false,
+        "enhance_map_compass": [],
         "logic_no_night_tokens_without_suns_song": false,
         "disabled_locations": [
             "Deku Theater Mask of Truth",
-            "Song from Impa",
-            "Dodongos Cavern Deku Scrub Lobby",
-            "Dodongos Cavern Deku Scrub Near Bomb Bag Right",
-            "Dodongos Cavern Deku Scrub Near Bomb Bag Left",
-            "Dodongos Cavern Deku Scrub Side Room Near Dodongos",
-            "Jabu Jabus Belly Deku Scrub",
-            "Ganons Castle Deku Scrub Center-Left",
-            "Ganons Castle Deku Scrub Center-Right",
-            "Ganons Castle Deku Scrub Right",
-            "Ganons Castle Deku Scrub Left"
+            "Song from Impa"
         ],
         "allowed_tricks": [
             "logic_fewer_tunic_requirements",
@@ -2250,13 +2308,17 @@
         ],
         "starting_inventory": [
             "ocarina",
-            "lens",
             "farores_wind",
-            "zeldas_letter"
+            "lens",
+            "zeldas_letter",
+            "light_arrow"
         ],
         "starting_songs": [
             "prelude"
         ],
+        "add_random_starting_items": false,
+        "random_starting_items_exclude": [],
+        "random_starting_items_count": 0,
         "start_with_consumables": true,
         "start_with_rupees": true,
         "starting_hearts": 3,
@@ -2268,14 +2330,14 @@
         "complete_mask_quest": false,
         "useful_cutscenes": false,
         "fast_chests": true,
-        "scarecrow_behavior": "vanilla",
+        "scarecrow_behavior": "free",
         "fast_bunny_hood": true,
         "auto_equip_masks": false,
-        "plant_beans": true,
+        "plant_beans": false,
         "easier_fire_arrow_entry": false,
         "fae_torch_count": 3,
         "ruto_already_f1_jabu": true,
-        "fast_shadow_boat": false,
+        "fast_shadow_boat": true,
         "chicken_count_random": false,
         "chicken_count": 3,
         "big_poe_count_random": false,
@@ -2292,7 +2354,8 @@
             "warp_songs_and_owls",
             "30_skulltulas",
             "40_skulltulas",
-            "50_skulltulas"
+            "50_skulltulas",
+            "unique_merchants"
         ],
         "correct_chest_appearances": "both",
         "chest_textures_specific": [
@@ -2322,7 +2385,7 @@
         "starting_tod": "default",
         "blue_fire_arrows": true,
         "fix_broken_drops": false,
-        "tcg_requires_lens": false,
+        "tcg_requires_lens": true,
         "no_collectible_hearts": false,
         "one_item_per_dungeon": false,
         "item_pool_value": "balanced",
@@ -2446,7 +2509,7 @@
         "shuffle_silver_rupees": "vanilla",
         "silver_rupee_pouches_choice": "off",
         "silver_rupee_pouches": [],
-        "enhance_map_compass": false,
+        "enhance_map_compass": [],
         "logic_no_night_tokens_without_suns_song": false,
         "disabled_locations": [
             "Deku Theater Mask of Truth",
@@ -2481,6 +2544,9 @@
             "zeldas_letter"
         ],
         "starting_songs": [],
+        "add_random_starting_items": false,
+        "random_starting_items_exclude": [],
+        "random_starting_items_count": 0,
         "start_with_consumables": true,
         "start_with_rupees": true,
         "starting_hearts": 3,
@@ -2660,7 +2726,7 @@
         "shuffle_silver_rupees": "vanilla",
         "silver_rupee_pouches_choice": "off",
         "silver_rupee_pouches": [],
-        "enhance_map_compass": false,
+        "enhance_map_compass": [],
         "logic_no_night_tokens_without_suns_song": false,
         "disabled_locations": [],
         "allowed_tricks": [],
@@ -2670,6 +2736,9 @@
             "zeldas_letter"
         ],
         "starting_songs": [],
+        "add_random_starting_items": false,
+        "random_starting_items_exclude": [],
+        "random_starting_items_count": 0,
         "start_with_consumables": false,
         "start_with_rupees": true,
         "starting_hearts": 3,
@@ -2862,7 +2931,7 @@
         "shuffle_silver_rupees": "vanilla",
         "silver_rupee_pouches_choice": "off",
         "silver_rupee_pouches": [],
-        "enhance_map_compass": false,
+        "enhance_map_compass": [],
         "logic_no_night_tokens_without_suns_song": false,
         "disabled_locations": [],
         "allowed_tricks": [
@@ -2941,6 +3010,9 @@
             "zeldas_letter"
         ],
         "starting_songs": [],
+        "add_random_starting_items": false,
+        "random_starting_items_exclude": [],
+        "random_starting_items_count": 0,
         "start_with_consumables": false,
         "start_with_rupees": false,
         "starting_hearts": 3,
